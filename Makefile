@@ -11,10 +11,10 @@ package-install:
 	python3 -m pip install --user dist/*.whl
 
 lint:
-	poetry run gendiff
+	poetry run flake8 gendiff
 
 test:
 	poetry install
 	poetry build
-	pip3 uninstall gendiff -y
-	python3 -m pip install --user dist/*.whl
+	pip3 uninstall hexlet-code -y
+	python3 -m pip install dist/*.whl
