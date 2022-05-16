@@ -1,9 +1,6 @@
 install:
 	poetry install
 
-#brain-games:
-#	poetry run brain-games
-
 build:
 	poetry build
 
@@ -13,11 +10,11 @@ publish:
 package-install:
 	python3 -m pip install --user dist/*.whl
 
-#lint:
-#	poetry run flake8 brain_games
+lint:
+	poetry run gendiff
 
-#test:
-#	poetry install
-#	poetry build
-#	pip3 uninstall gendiff -y
-#	python3 -m pip install --user dist/*.whl
+test:
+	poetry install
+	poetry build
+	pip3 uninstall gendiff -y
+	python3 -m pip install --user dist/*.whl

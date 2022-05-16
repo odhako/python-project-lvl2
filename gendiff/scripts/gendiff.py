@@ -1,8 +1,11 @@
 #!/usr/bin/env python
 
 
+from gendiff.program.main_unit import start
+
+
 def main():
-    print('Hello, World! This is gendiff.')
+    start()
 
 
 if __name__ == '__main__':
