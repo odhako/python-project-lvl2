@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = "TODO: Write description"
+description = ""
 authors = ["odhako <odhako@gmail.com>"]
 
 [tool.poetry.dependencies]
