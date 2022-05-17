@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 
-from gendiff.program.gendiff import start
+from gendiff import cli
 
 
 def main():
-    start()
+    cli()
 
 
 if __name__ == '__main__':

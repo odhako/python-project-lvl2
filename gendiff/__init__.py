@@ -1,2 +1,2 @@
-from .program.gendiff import generate_diff, main, start
-__all__ = ['generate_diff', 'start', 'main']
+from .program.gendiff import generate_diff, cli, start
+__all__ = ['generate_diff', 'start', 'cli']
