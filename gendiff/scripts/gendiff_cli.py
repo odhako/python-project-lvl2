@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-from gendiff.program.main_unit import start
+from gendiff.program.gendiff import start
 
 
 def main():
