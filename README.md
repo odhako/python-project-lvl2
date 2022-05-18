@@ -1,6 +1,8 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/odhako/python-project-lvl2/workflows/hexlet-check/badge.svg)](https://github.com/odhako/python-project-lvl2/actions)
 [![Tests and linter](https://github.com/odhako/python-project-lvl2/actions/workflows/test-and-linter.yml/badge.svg)](https://github.com/odhako/python-project-lvl2/actions/workflows/test-and-linter.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/1721476434a5efe8ca48/maintainability)](https://codeclimate.com/github/odhako/python-project-lvl2/maintainability)
+
 
 ### Hello World!
 Work in progress. Thanks for reading this.
