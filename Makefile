@@ -18,3 +18,9 @@ test:
 	poetry build
 	pip3 uninstall hexlet-code -y
 	python3 -m pip install dist/*.whl
+
+test-coverage:
+	poetry run pytest --cov=gendiff
+
+pytest:
+	poetry run pytest
