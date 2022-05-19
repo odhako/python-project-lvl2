@@ -9,5 +9,5 @@
 Work in progress. Thanks for reading this.
 
 ### Demo:
-`gendiff file1 file2` - plain json files: [asciinema](https://asciinema.org/a/495168)
-`gendiff file1 file2` - plain json and yaml files: [asciinema](https://asciinema.org/a/495671)
+- `gendiff file1 file2` - plain json files: [asciinema](https://asciinema.org/a/495168)
+- `gendiff file1 file2` - plain json and yaml files: [asciinema](https://asciinema.org/a/495671)
