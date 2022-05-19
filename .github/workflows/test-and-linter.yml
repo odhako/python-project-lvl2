@@ -31,15 +31,17 @@ jobs:
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
-        flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+        poetry run flake8 gendiff
+        # idk ^ --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
+        poetry run flake8 gendiff
+        # idk ^ --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        pytest
+        poetry run pytest
     - name: Test & publish code coverage
       uses: paambaati/codeclimate-action@v3.0.0
       env:
         CC_TEST_REPORTER_ID: 9e9640608db65e48d73b2b5255f7d2ee2ea2ad5c0f370d89b5cb7ae1987d7fa2
       with:
-        coverageCommand: pytest --cov=gendiff --cov-report xml
+        coverageCommand: poetry run pytest --cov=gendiff --cov-report xml
