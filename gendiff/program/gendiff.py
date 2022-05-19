@@ -5,10 +5,19 @@ def check_type(value):
         return value
 
 
+def load_file(file_path):
+    if file_path.endswith('.json'):
+        from json import load as file_load
+    elif file_path.endswith(('.yaml', '.yml')):
+        from yaml import safe_load as file_load
+    else:
+        raise TypeError('Unknown file type!')
+    return file_load(open(file_path))
+
+
 def generate_diff(file_path1, file_path2):
-    from json import load as json_load
-    file1 = json_load(open(file_path1))
-    file2 = json_load(open(file_path2))
+    file1 = load_file(file_path1)
+    file2 = load_file(file_path2)
     result = {}
     for key, value in file1.items():
         if key in file2 and value == file2[key]:
@@ -31,15 +40,3 @@ def generate_diff(file_path1, file_path2):
                 string_out += f'  + {key}: {value["+"]}\n'
     string_out += '}'
     return string_out
-
-
-def cli():
-    import argparse
-    parser = argparse.ArgumentParser(
-        description='Compares two configuration files and shows a difference.'
-    )
-    parser.add_argument('-f', '--format', help='set format of output')
-    parser.add_argument('first_file')
-    parser.add_argument('second_file')
-    args = parser.parse_args()
-    print(generate_diff(args.first_file, args.second_file))
