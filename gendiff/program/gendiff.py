@@ -55,36 +55,6 @@ def get_children(item):
     return item['children']
 
 
-def generate_diff(file_path1, file_path2):
-    file1 = load_file(file_path1)
-    file2 = load_file(file_path2)
-
-    def walk(item1, item2, acc):
-        for key, value in item1.items():
-            if key in item2 and type(value) == dict == type(item2[key]):
-                status = ' '
-                acc.append(make_node(key, status, walk(value, item2[key], acc=[])))
-            elif key in item2 and value == item2[key]:
-                status = ' '
-                acc.append(make_leaf(key, status, check_type(value)))
-            else:
-                status = '-'
-                acc.append(make_leaf(key, status, check_type(value)))
-        for key, value in item2.items():
-            if key in item1 and type(value) == dict == type(item1[key]):
-                pass
-            elif key in item1 and value == item1[key]:
-                pass
-            else:
-                status = '+'
-                acc.append(make_leaf(key, status, check_type(value)))
-        return acc
-
-    answer = []
-    answer = walk(file1, file2, answer)
-    return answer
-
-
 def stylish(diff):
 
     def walk_dict(item, acc, depth):
@@ -123,3 +93,33 @@ def stylish(diff):
     output_string = walk(diff, output_string, depth=0)
     output_string += '}'
     return output_string
+
+
+def generate_diff(file_path1, file_path2, style=stylish):
+    file1 = load_file(file_path1)
+    file2 = load_file(file_path2)
+
+    def walk(item1, item2, acc):
+        for key, value in item1.items():
+            if key in item2 and type(value) == dict == type(item2[key]):  # noqa
+                status = ' '
+                acc.append(make_node(key, status, walk(value, item2[key], acc=[])))
+            elif key in item2 and value == item2[key]:
+                status = ' '
+                acc.append(make_leaf(key, status, check_type(value)))
+            else:
+                status = '-'
+                acc.append(make_leaf(key, status, check_type(value)))
+        for key, value in item2.items():
+            if key in item1 and type(value) == dict == type(item1[key]):  # noqa
+                pass
+            elif key in item1 and value == item1[key]:
+                pass
+            else:
+                status = '+'
+                acc.append(make_leaf(key, status, check_type(value)))
+        return acc
+
+    answer = []
+    answer = walk(file1, file2, answer)
+    return style(answer)

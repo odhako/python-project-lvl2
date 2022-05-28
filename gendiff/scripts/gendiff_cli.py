@@ -1,11 +1,11 @@
 #!/usr/bin/env python
 
 
-from gendiff import cli, generate_diff
+from gendiff import cli
 
 
 def main():
-    cli(generate_diff)
+    cli()
 
 
 if __name__ == '__main__':

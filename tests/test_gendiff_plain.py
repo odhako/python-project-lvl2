@@ -1,5 +1,5 @@
 import pytest
-from gendiff import generate_diff, stylish
+from gendiff import generate_diff
 
 
 @pytest.fixture
@@ -9,14 +9,14 @@ def expected():
 
 
 def test_diff_json(expected):
-    assert stylish(generate_diff('tests/fixtures/plain/file1.json', 'tests/fixtures/plain/file2.json')) == expected
+    assert generate_diff('tests/fixtures/plain/file1.json', 'tests/fixtures/plain/file2.json') == expected
 
 
 def test_diff_yaml(expected):
-    assert stylish(generate_diff('tests/fixtures/plain/file1.yaml', 'tests/fixtures/plain/file2.yaml')) == expected
-    assert stylish(generate_diff('tests/fixtures/plain/file1.yml', 'tests/fixtures/plain/file2.yml')) == expected
+    assert generate_diff('tests/fixtures/plain/file1.yaml', 'tests/fixtures/plain/file2.yaml') == expected
+    assert generate_diff('tests/fixtures/plain/file1.yml', 'tests/fixtures/plain/file2.yml') == expected
 
 
 def test_error():
     with pytest.raises(TypeError):
-        stylish(generate_diff('tests/fixtures/plain/result_plain', 'tests/fixtures/plain/result_plain'))
+        generate_diff('tests/fixtures/plain/result_plain', 'tests/fixtures/plain/result_plain')
