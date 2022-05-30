@@ -1,5 +1,5 @@
-from gendiff.format.internal import is_node, get_key, get_status, get_value, \
-    get_children
+from gendiff.format.internal import is_node, get_key, get_status, get_value
+from gendiff.format.internal import get_children, check_stylish
 
 
 def stylish(diff):  # noqa: C901
@@ -35,7 +35,8 @@ def stylish(diff):  # noqa: C901
                     depth -= 1
                 else:
                     acc += f'{indent * depth}  {get_status(item)} ' \
-                           f'{get_key(item)}: {get_value(item)}\n'
+                           f'{get_key(item)}: ' \
+                           f'{check_stylish(get_value(item))}\n'
         return acc
 
     indent = '    '

@@ -1,4 +1,4 @@
-from gendiff.format.internal import check_in, make_node, make_leaf
+from gendiff.format.internal import make_node, make_leaf
 from gendiff.format.stylish import stylish
 
 
@@ -24,10 +24,10 @@ def generate_diff(file_path1, file_path2, style=stylish):  # noqa: C901
                     make_node(key, status, walk(value, item2[key], acc=[])))  # noqa
             elif key in item2 and value == item2[key]:
                 status = ' '
-                acc.append(make_leaf(key, status, check_in(value)))
+                acc.append(make_leaf(key, status, value))
             else:
                 status = '-'
-                acc.append(make_leaf(key, status, check_in(value)))
+                acc.append(make_leaf(key, status, value))
         for key, value in item2.items():
             if key in item1 and type(value) == dict == type(item1[key]):  # noqa
                 pass
@@ -35,7 +35,7 @@ def generate_diff(file_path1, file_path2, style=stylish):  # noqa: C901
                 pass
             else:
                 status = '+'
-                acc.append(make_leaf(key, status, check_in(value)))
+                acc.append(make_leaf(key, status, value))
         return acc
 
     answer = []

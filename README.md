@@ -13,4 +13,4 @@ Work in progress. Thanks for reading this.
 - `gendiff file1 file2` - plain json and yaml files: [asciinema](https://asciinema.org/a/495671)
 - `gendiff file1 file2` - nested files: [asciinema](https://asciinema.org/a/497757)
 - `gendiff -f plain file1 file2` - plain style [asciinema](https://asciinema.org/a/497782)
-- 
+- `gendiff -f json file1 file2` - json format output [asciinema](https://asciinema.org/a/498043)

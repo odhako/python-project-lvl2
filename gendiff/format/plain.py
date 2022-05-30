@@ -1,5 +1,5 @@
-from gendiff.format.internal import check_out, is_node, get_key, get_status, \
-    get_value, get_children
+from gendiff.format.internal import check_plain, is_node, get_key, get_status
+from gendiff.format.internal import get_value, get_children
 
 
 def plain(diff):  # noqa: C901
@@ -20,8 +20,8 @@ def plain(diff):  # noqa: C901
                             get_value(sorted(children, key=get_key)[index + 1])
                         acc.append(
                             f"Property '{path + get_key(item)}' was updated. "
-                            f"From {check_out(get_value(item))} to "
-                            f"{check_out(next_value)}"
+                            f"From {check_plain(get_value(item))} to "
+                            f"{check_plain(next_value)}"
                         )
                     else:
                         acc.append(
@@ -35,7 +35,7 @@ def plain(diff):  # noqa: C901
                         acc.append(
                             f"Property '{path + get_key(item)}' "
                             f"was added with value: "
-                            f"{check_out(get_value(item))}"
+                            f"{check_plain(get_value(item))}"
                         )
         return acc
 

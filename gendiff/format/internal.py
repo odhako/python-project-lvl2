@@ -1,17 +1,17 @@
-def check_in(value):
-    if type(value) == bool:
-        return str(value).lower()
-    elif value is None:
-        return 'null'
+def check_stylish(value):
+    encoder = {True: 'true', False: 'false', None: 'null'}
+    if value in encoder.keys():
+        return encoder[value]
     else:
         return value
 
 
-def check_out(value):
-    if value in ['true', 'false', 'null']:
-        return value
-    elif isinstance(value, dict):
+def check_plain(value):
+    encoder = {True: 'true', False: 'false', None: 'null'}
+    if isinstance(value, dict):
         return "[complex value]"
+    elif value in encoder.keys():
+        return encoder[value]
     else:
         return f"'{value}'"
 

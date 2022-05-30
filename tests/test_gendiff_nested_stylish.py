@@ -4,8 +4,8 @@ from gendiff import generate_diff
 
 @pytest.fixture
 def expected():
-    with open('tests/fixtures/nested/result_nested_stylish', 'r') as expected:
-        return expected.read()
+    with open('tests/fixtures/nested/result_nested_stylish', 'r') as result:
+        return result.read()
 
 
 def test_diff_json(expected):
