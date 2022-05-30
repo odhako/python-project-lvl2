@@ -3,7 +3,7 @@ from gendiff.format.internal import is_node, get_key, get_value
 from gendiff.format.internal import get_status, get_children
 
 
-def json_format(diff):
+def json_format(diff):  # noqa: C901
 
     def walk_dict(item, acc):
         for key, value in item.items():
