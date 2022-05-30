@@ -1,0 +1,9 @@
+{
+    "host": "odhako.io",
+    "timeout": 50,
+    "proxy": "123.234.53.22",
+    "follow": true,
+    "nested": {
+        "zero": 0
+    }
+}
