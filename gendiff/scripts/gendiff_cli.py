@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 
-from gendiff import cli
+from gendiff.program.cli import cli
 
 
 def main():

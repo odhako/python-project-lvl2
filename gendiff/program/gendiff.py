@@ -1,5 +1,7 @@
 from gendiff.format.internal import make_node, make_leaf
-from gendiff.format.stylish import stylish
+from ..format.stylish import stylish
+from ..format.plain import plain
+from ..format.json import json_format
 
 
 def load_file(file_path):
@@ -12,7 +14,7 @@ def load_file(file_path):
     return file_load(open(file_path))
 
 
-def generate_diff(file_path1, file_path2, style=stylish):  # noqa: C901
+def generate_diff(file_path1, file_path2, style='stylish'):  # noqa: C901
     file1 = load_file(file_path1)
     file2 = load_file(file_path2)
 
@@ -40,4 +42,9 @@ def generate_diff(file_path1, file_path2, style=stylish):  # noqa: C901
 
     answer = []
     answer = walk(file1, file2, answer)
-    return style(answer)
+    if style == 'stylish':
+        return stylish(answer)
+    elif style == 'plain':
+        return plain(answer)
+    elif style == 'json':
+        return json_format(answer)

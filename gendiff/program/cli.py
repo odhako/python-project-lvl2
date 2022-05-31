@@ -1,5 +1,5 @@
 import argparse
-from gendiff import generate_diff, plain, json_format
+from gendiff import generate_diff
 
 
 def cli():
@@ -12,8 +12,10 @@ def cli():
     parser.add_argument('second_file')
     args = parser.parse_args()
     if args.format == 'plain':
-        print(generate_diff(args.first_file, args.second_file, plain))
+        print(generate_diff(args.first_file, args.second_file, 'plain'))
     elif args.format == 'json':
-        print(generate_diff(args.first_file, args.second_file, json_format))
+        print(generate_diff(args.first_file, args.second_file, 'json'))
+    elif args.format == 'stylish':
+        print(generate_diff(args.first_file, args.second_file, 'stylish'))
     else:
         print(generate_diff(args.first_file, args.second_file))

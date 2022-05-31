@@ -1,6 +1,4 @@
 def check_stylish(value):
-    # if isinstance(value, int):
-    #     return value
     encoder = {True: 'true', False: 'false', None: 'null'}
     for key, key_value in encoder.items():
         if value is key:

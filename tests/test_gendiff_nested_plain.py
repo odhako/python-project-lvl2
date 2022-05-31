@@ -1,5 +1,5 @@
 import pytest
-from gendiff import generate_diff, plain
+from gendiff import generate_diff
 
 
 @pytest.fixture
@@ -11,14 +11,14 @@ def expected():
 def test_diff_json(expected):
     assert generate_diff('tests/fixtures/nested/file1.json',
                          'tests/fixtures/nested/file2.json',
-                         plain) == expected
+                         'plain') == expected
 
 
 def test_diff_yaml(expected):
     assert generate_diff('tests/fixtures/nested/file1.yaml',
                          'tests/fixtures/nested/file2.yaml',
-                         plain) == expected
+                         'plain') == expected
 
     assert generate_diff('tests/fixtures/nested/file1.yml',
                          'tests/fixtures/nested/file2.yml',
-                         plain) == expected
+                         'plain') == expected
