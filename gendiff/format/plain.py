@@ -14,19 +14,28 @@ def plain(diff):  # noqa: C901
                     pass
             else:
                 if get_status(item) == '-':
-                    next_key = get_key(sorted(children, key=get_key)[index + 1])
-                    if get_key(item) == next_key:
-                        next_value = \
-                            get_value(sorted(children, key=get_key)[index + 1])
-                        acc.append(
-                            f"Property '{path + get_key(item)}' was updated. "
-                            f"From {check_plain(get_value(item))} to "
-                            f"{check_plain(next_value)}"
-                        )
-                    else:
+                    if index == len(children) - 1:
                         acc.append(
                             f"Property '{path + get_key(item)}' was removed"
                         )
+                    else:
+                        next_key = get_key(
+                            sorted(children, key=get_key)[index + 1]
+                        )
+                        if get_key(item) == next_key:
+                            next_value = get_value(
+                                sorted(children, key=get_key)[index + 1]
+                            )
+                            acc.append(
+                                f"Property '{path + get_key(item)}' "
+                                f"was updated. From "
+                                f"{check_plain(get_value(item))} to "
+                                f"{check_plain(next_value)}"
+                            )
+                        else:
+                            acc.append(
+                                f"Property '{path + get_key(item)}' was removed"
+                            )
                 elif get_status(item) == '+':
                     if get_key(item) == \
                             get_key(sorted(children, key=get_key)[index - 1]):
