@@ -1,17 +1,26 @@
 def check_stylish(value):
+    # if isinstance(value, int):
+    #     return value
     encoder = {True: 'true', False: 'false', None: 'null'}
-    if value in encoder.keys():
-        return encoder[value]
-    else:
-        return value
+    for key, key_value in encoder.items():
+        if value is key:
+            return key_value
+        else:
+            pass
+    return value
 
 
 def check_plain(value):
-    encoder = {True: 'true', False: 'false', None: 'null'}
     if isinstance(value, dict):
         return "[complex value]"
-    elif value in encoder.keys():
-        return encoder[value]
+    encoder = {True: 'true', False: 'false', None: 'null'}
+    for key, key_value in encoder.items():
+        if value is key:
+            return key_value
+        else:
+            pass
+    if type(value) == int:
+        return value
     else:
         return f"'{value}'"
 

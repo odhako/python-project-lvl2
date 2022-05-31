@@ -18,7 +18,8 @@
   "group1": {
     "foo": "bar",
     "baz": "bars",
-    "nest": "str"
+    "nest": "str",
+    "zero": 0
   },
   "group3": {
     "deep": {

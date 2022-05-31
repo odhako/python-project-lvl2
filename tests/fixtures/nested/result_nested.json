@@ -25,7 +25,8 @@
         "- nest": {
             "  key": "value"
         },
-        "+ nest": "str"
+        "+ nest": "str",
+        "+ zero": 0
     },
     "- group2": {
         "  abc": 12345,
