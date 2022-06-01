@@ -23,7 +23,8 @@ def generate_diff(file_path1, file_path2, style='stylish'):  # noqa: C901
             if key in item2 and type(value) == dict == type(item2[key]):  # noqa
                 status = ' '
                 acc.append(
-                    make_node(key, status, walk(value, item2[key], acc=[])))  # noqa
+                    make_node(key, status, walk(value, item2[key], acc=[]))
+                )
             elif key in item2 and value == item2[key]:
                 status = ' '
                 acc.append(make_leaf(key, status, value))

@@ -4,9 +4,22 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/1721476434a5efe8ca48/maintainability)](https://codeclimate.com/github/odhako/python-project-lvl2/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/1721476434a5efe8ca48/test_coverage)](https://codeclimate.com/github/odhako/python-project-lvl2/test_coverage)
 
+## Gendiff
+Diff generator for with command line interface.
+Supports json and yaml files.
 
-### Hello World!
-Work in progress. Thanks for reading this.
+#### Manual installation:
+- Install poetry https://python-poetry.org/docs/master/#installing-with-the-official-installer
+- Download or clone source code
+- Open directory in a terminal
+- `poetry install`
+- `poetry build`
+- `python3 -m pip install --user dist/*.whl`
+
+#### Usage:
+`gendiff first_file_path second_file_path`
+
+`-f --format` `{stylish, plain, json}` - choose format. Default is stylish.
 
 ### Demo:
 - `gendiff file1 file2` - plain json files: [asciinema](https://asciinema.org/a/495168)
