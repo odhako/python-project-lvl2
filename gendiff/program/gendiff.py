@@ -14,6 +14,15 @@ def load_file(file_path):
     return file_load(open(file_path))
 
 
+def form_output(result, style):
+    if style == 'stylish':
+        return stylish(result)
+    elif style == 'plain':
+        return plain(result)
+    elif style == 'json':
+        return json_format(result)
+
+
 def generate_diff(file_path1, file_path2, style='stylish'):  # noqa: C901
     file1 = load_file(file_path1)
     file2 = load_file(file_path2)
@@ -43,9 +52,4 @@ def generate_diff(file_path1, file_path2, style='stylish'):  # noqa: C901
 
     answer = []
     answer = walk(file1, file2, answer)
-    if style == 'stylish':
-        return stylish(answer)
-    elif style == 'plain':
-        return plain(answer)
-    elif style == 'json':
-        return json_format(answer)
+    return form_output(answer, style)
