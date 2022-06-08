@@ -21,7 +21,7 @@ def parse_string(string, string_format='json'):
         return yaml_loads(string)
 
 
-def make_inner_diff(file1, file2):  # noqa: C901
+def make_inner_diff(dict1, dict2):  # noqa: C901
     def walk(item1, item2, acc=[]):
         for key, value in item1.items():
             if key in item2 and type(value) == dict and type(item2[key]) == dict: # noqa
@@ -46,7 +46,7 @@ def make_inner_diff(file1, file2):  # noqa: C901
                 status = '+'
                 acc.append(make_leaf(key, status, value))
         return acc
-    answer = walk(file1, file2)
+    answer = walk(dict1, dict2)
     return answer
 
 
