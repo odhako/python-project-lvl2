@@ -14,11 +14,13 @@ def read_file(file_path):
     return open(file_path).read(), file_format
 
 
-def parse_string(string, string_format='json'):
+def parse_string(string, string_format):
     if string_format == 'json':
         return json_loads(string)
     elif string_format == 'yaml':
         return yaml_loads(string)
+    else:
+        raise TypeError('Unknown string format!')
 
 
 def make_inner_diff(dict1, dict2):  # noqa: C901
