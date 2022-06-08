@@ -1,4 +1,3 @@
-from gendiff.program.diff_maker import make_node, make_leaf
 from gendiff.format.output import form_output
 from json import loads as json_loads
 from yaml import safe_load as yaml_loads
@@ -21,6 +20,24 @@ def parse_string(string, string_format):
         return yaml_loads(string)
     else:
         raise TypeError('Unknown string format!')
+
+
+def make_node(key, status, children):
+    node = {
+        'key': key,
+        'status': status,
+        'children': children
+    }
+    return node
+
+
+def make_leaf(key, status, value):
+    leaf = {
+        'key': key,
+        'status': status,
+        'value': value
+    }
+    return leaf
 
 
 def make_inner_diff(dict1, dict2):  # noqa: C901
