@@ -22,7 +22,7 @@ def parse_string(string, string_format='json'):
 
 
 def make_inner_diff(file1, file2):  # noqa: C901
-    def walk(item1, item2, acc):
+    def walk(item1, item2, acc=[]):
         for key, value in item1.items():
             if key in item2 and type(value) == dict == type(item2[key]):  # noqa
                 status = ' '
@@ -46,8 +46,7 @@ def make_inner_diff(file1, file2):  # noqa: C901
                 status = '+'
                 acc.append(make_leaf(key, status, value))
         return acc
-    answer = []
-    answer = walk(file1, file2, answer)
+    answer = walk(file1, file2)
     return answer
 
 

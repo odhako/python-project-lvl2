@@ -32,3 +32,5 @@ def test_error():
         generate_diff('tests/fixtures/nested/result_nested_plain',
                       'tests/fixtures/nested/result_nested_stylish',
                       'json')
+
+# TODO: Переделать тест
