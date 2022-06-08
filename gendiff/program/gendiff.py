@@ -4,7 +4,7 @@ from json import loads as json_loads
 from yaml import safe_load as yaml_loads
 
 
-def open_file(file_path):
+def read_file(file_path):
     if file_path.endswith('.json'):
         file_format = 'json'
     elif file_path.endswith(('.yaml', '.yml')):
@@ -51,7 +51,7 @@ def make_inner_diff(file1, file2):  # noqa: C901
 
 
 def generate_diff(file_path1, file_path2, style='stylish'):
-    file1 = parse_string(*open_file(file_path1))
-    file2 = parse_string(*open_file(file_path2))
+    file1 = parse_string(*read_file(file_path1))
+    file2 = parse_string(*read_file(file_path2))
     answer = make_inner_diff(file1, file2)
     return form_output(answer, style)
