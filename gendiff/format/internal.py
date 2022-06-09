@@ -41,3 +41,8 @@ def get_value(item):
 
 def get_children(item):
     return item['children']
+
+
+ADDED = 'ADDED'
+REMOVED = 'REMOVED'
+SAME = 'SAME'

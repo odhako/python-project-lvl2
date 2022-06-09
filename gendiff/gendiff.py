@@ -1,3 +1,4 @@
+from gendiff.format.internal import ADDED, REMOVED, SAME
 from gendiff.format.output import form_output, STYLISH
 from json import loads as json_loads
 from yaml import safe_load as yaml_loads
@@ -44,17 +45,17 @@ def make_inner_diff(dict1, dict2):  # noqa: C901
     def walk(item1, item2, acc=[]):
         for key, value in item1.items():
             if key in item2 and type(value) == dict and type(item2[key]) == dict: # noqa
-                status = ' '
+                status = SAME
                 acc.append(
                     make_node(
                         key, status, walk(value, item2[key], acc=[])
                     )
                 )
             elif key in item2 and value == item2[key]:
-                status = ' '
+                status = SAME
                 acc.append(make_leaf(key, status, value))
             else:
-                status = '-'
+                status = REMOVED
                 acc.append(make_leaf(key, status, value))
         for key, value in item2.items():
             if key in item1 and type(value) == dict and type(item1[key]) == dict:  # noqa
@@ -62,7 +63,7 @@ def make_inner_diff(dict1, dict2):  # noqa: C901
             elif key in item1 and value == item1[key]:
                 pass
             else:
-                status = '+'
+                status = ADDED
                 acc.append(make_leaf(key, status, value))
         return acc
     answer = walk(dict1, dict2)

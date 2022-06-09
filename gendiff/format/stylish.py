@@ -1,5 +1,10 @@
 from gendiff.format.internal import is_node, get_key, get_status, get_value
 from gendiff.format.internal import get_children, check_stylish
+from gendiff.format.internal import ADDED, REMOVED, SAME
+
+
+def get_output_status(status):
+    return {ADDED: '+', REMOVED: '-', SAME: ' '}[status]
 
 
 def stylish(diff):  # noqa: C901
@@ -19,7 +24,8 @@ def stylish(diff):  # noqa: C901
     def walk(children, acc, depth):
         for item in sorted(children, key=get_key):
             if is_node(item):
-                acc += f'{indent * depth}  {get_status(item)} ' \
+                acc += f'{indent * depth}  ' \
+                       f'{get_output_status(get_status(item))} ' \
                        f'{get_key(item)}: ' + '{\n'
                 depth += 1
                 acc += walk(get_children(item), '', depth)
@@ -27,14 +33,16 @@ def stylish(diff):  # noqa: C901
                 depth -= 1
             else:
                 if isinstance(get_value(item), dict):
-                    acc += f'{indent * depth}  {get_status(item)} ' \
+                    acc += f'{indent * depth}  ' \
+                           f'{get_output_status(get_status(item))} ' \
                            f'{get_key(item)}: ' + '{\n'
                     depth += 1
                     acc += walk_dict(get_value(item), '', depth)
                     acc += f'{indent * depth}' + '}\n'
                     depth -= 1
                 else:
-                    acc += f'{indent * depth}  {get_status(item)} ' \
+                    acc += f'{indent * depth}  ' \
+                           f'{get_output_status(get_status(item))} ' \
                            f'{get_key(item)}: ' \
                            f'{check_stylish(get_value(item))}\n'
         return acc

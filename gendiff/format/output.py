@@ -2,7 +2,6 @@ from .json import json_format
 from .plain import plain
 from .stylish import stylish
 
-
 STYLISH = 'stylish'
 PLAIN = 'plain'
 JSON = 'json'
