@@ -1,4 +1,4 @@
-from gendiff.format.output import form_output
+from gendiff.format.output import form_output, STYLISH
 from json import loads as json_loads
 from yaml import safe_load as yaml_loads
 
@@ -69,7 +69,7 @@ def make_inner_diff(dict1, dict2):  # noqa: C901
     return answer
 
 
-def generate_diff(file_path1, file_path2, style='stylish'):
+def generate_diff(file_path1, file_path2, style=STYLISH):
     file1 = parse_string(*read_file(file_path1))
     file2 = parse_string(*read_file(file_path2))
     answer = make_inner_diff(file1, file2)
