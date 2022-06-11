@@ -71,7 +71,7 @@ def make_inner_diff(dict1, dict2):  # noqa: C901
 
 
 def generate_diff(file_path1, file_path2, style=STYLISH):
-    file1 = parse_string(*read_file(file_path1))
-    file2 = parse_string(*read_file(file_path2))
-    answer = make_inner_diff(file1, file2)
+    string1 = parse_string(*read_file(file_path1))
+    string2 = parse_string(*read_file(file_path2))
+    answer = make_inner_diff(string1, string2)
     return form_output(answer, style)
