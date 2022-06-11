@@ -12,43 +12,46 @@ def stylish(diff):  # noqa: C901
     def walk_dict(item, acc, depth):
         for key, value in sorted(item.items()):
             if isinstance(value, dict):
-                acc += f'{indent * depth}    {key}: ' + '{\n'
+                acc.append(f'{indent * depth}    {key}: ' + '{')
                 depth += 1
-                acc += walk_dict(value, '', depth)
-                acc += f'{indent * depth}' + '}\n'
+                acc.extend(walk_dict(value, [], depth))
+                acc.append(f'{indent * depth}' + '}')
                 depth -= 1
             else:
-                acc += f'{indent * depth}    {key}: {value}\n'
+                acc.append(f'{indent * depth}    {key}: {value}')
         return acc
 
     def walk(children, acc, depth):
         for item in sorted(children, key=get_key):
             if is_node(item):
-                acc += f'{indent * depth}  ' \
-                       f'{get_output_status(get_status(item))} ' \
-                       f'{get_key(item)}: ' + '{\n'
+                acc.append(
+                    f'{indent * depth}  {get_output_status(get_status(item))} '
+                    f'{get_key(item)}: ' + '{'
+                )
                 depth += 1
-                acc += walk(get_children(item), '', depth)
-                acc += f'{indent * depth}' + '}\n'
+                acc.extend(walk(get_children(item), [], depth))
+                acc.append(f'{indent * depth}' + '}')
                 depth -= 1
             else:
                 if isinstance(get_value(item), dict):
-                    acc += f'{indent * depth}  ' \
-                           f'{get_output_status(get_status(item))} ' \
-                           f'{get_key(item)}: ' + '{\n'
+                    acc.append(
+                        f'{indent * depth}  '
+                        f'{get_output_status(get_status(item))} '
+                        f'{get_key(item)}: ' + '{'
+                    )
                     depth += 1
-                    acc += walk_dict(get_value(item), '', depth)
-                    acc += f'{indent * depth}' + '}\n'
+                    acc.extend(walk_dict(get_value(item), [], depth))
+                    acc.append(f'{indent * depth}' + '}')
                     depth -= 1
                 else:
-                    acc += f'{indent * depth}  ' \
-                           f'{get_output_status(get_status(item))} ' \
-                           f'{get_key(item)}: ' \
-                           f'{check_stylish(get_value(item))}\n'
+                    acc.append(
+                        f'{indent * depth}  '
+                        f'{get_output_status(get_status(item))} '
+                        f'{get_key(item)}: {check_stylish(get_value(item))}'
+                    )
         return acc
 
     indent = '    '
-    output_string = '{\n'
-    output_string = walk(diff, output_string, depth=0)
-    output_string += '}'
-    return output_string
+    result = walk(diff, ['{'], depth=0)
+    result.append('}')
+    return '\n'.join(result)
