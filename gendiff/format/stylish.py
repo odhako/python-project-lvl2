@@ -1,5 +1,5 @@
 from gendiff.format.internal import is_node, get_key, get_status, get_value
-from gendiff.format.internal import get_children, check_stylish
+from gendiff.format.internal import get_children
 from gendiff.format.internal import ADDED, REMOVED, SAME
 
 
@@ -55,3 +55,13 @@ def stylish(diff):  # noqa: C901
     result = walk(diff, ['{'], depth=0)
     result.append('}')
     return '\n'.join(result)
+
+
+def check_stylish(value):
+    encoder = {True: 'true', False: 'false', None: 'null'}
+    for key, key_value in encoder.items():
+        if value is key:
+            return key_value
+        else:
+            pass
+    return value

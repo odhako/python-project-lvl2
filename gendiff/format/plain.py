@@ -1,4 +1,4 @@
-from gendiff.format.internal import check_plain, is_node, get_key, get_status
+from gendiff.format.internal import is_node, get_key, get_status
 from gendiff.format.internal import get_value, get_children
 from gendiff.format.internal import ADDED, REMOVED, SAME
 
@@ -52,3 +52,18 @@ def plain(diff):  # noqa: C901
     result = walk(diff, [], '')
     result = '\n'.join(result)
     return result
+
+
+def check_plain(value):
+    if isinstance(value, dict):
+        return "[complex value]"
+    encoder = {True: 'true', False: 'false', None: 'null'}
+    for key, key_value in encoder.items():
+        if value is key:
+            return key_value
+        else:
+            pass
+    if type(value) == int:
+        return value
+    else:
+        return f"'{value}'"

@@ -1,28 +1,3 @@
-def check_stylish(value):
-    encoder = {True: 'true', False: 'false', None: 'null'}
-    for key, key_value in encoder.items():
-        if value is key:
-            return key_value
-        else:
-            pass
-    return value
-
-
-def check_plain(value):
-    if isinstance(value, dict):
-        return "[complex value]"
-    encoder = {True: 'true', False: 'false', None: 'null'}
-    for key, key_value in encoder.items():
-        if value is key:
-            return key_value
-        else:
-            pass
-    if type(value) == int:
-        return value
-    else:
-        return f"'{value}'"
-
-
 def is_node(item):
     return 'children' in item
 
