@@ -7,6 +7,15 @@ def get_output_status(status):
     return {ADDED: '+', REMOVED: '-', SAME: ' '}[status]
 
 
+def convert_stylish(value):
+    if type(value) == int:
+        return value
+    encoder = {True: 'true', False: 'false', None: 'null'}
+    if value in encoder.keys():
+        return encoder[value]
+    return value
+
+
 def stylish(diff):  # noqa: C901
 
     def walk_dict(item, acc, depth):
@@ -47,7 +56,7 @@ def stylish(diff):  # noqa: C901
                     acc.append(
                         f'{indent * depth}  '
                         f'{get_output_status(get_status(item))} '
-                        f'{get_key(item)}: {check_stylish(get_value(item))}'
+                        f'{get_key(item)}: {convert_stylish(get_value(item))}'
                     )
         return acc
 
@@ -55,13 +64,3 @@ def stylish(diff):  # noqa: C901
     result = walk(diff, ['{'], depth=0)
     result.append('}')
     return '\n'.join(result)
-
-
-def check_stylish(value):
-    encoder = {True: 'true', False: 'false', None: 'null'}
-    for key, key_value in encoder.items():
-        if value is key:
-            return key_value
-        else:
-            pass
-    return value

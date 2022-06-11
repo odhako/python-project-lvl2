@@ -3,6 +3,18 @@ from gendiff.format.internal import get_value, get_children
 from gendiff.format.internal import ADDED, REMOVED, SAME
 
 
+def convert_plain(value):
+    if isinstance(value, dict):
+        return "[complex value]"
+    if type(value) == int:
+        return value
+    encoder = {True: 'true', False: 'false', None: 'null'}
+    if value in encoder.keys():
+        return encoder[value]
+    else:
+        return f"'{value}'"
+
+
 def plain(diff):  # noqa: C901
 
     def walk(children, acc, path):
@@ -30,8 +42,8 @@ def plain(diff):  # noqa: C901
                             acc.append(
                                 f"Property '{path + get_key(item)}' "
                                 f"was updated. From "
-                                f"{check_plain(get_value(item))} to "
-                                f"{check_plain(next_value)}"
+                                f"{convert_plain(get_value(item))} to "
+                                f"{convert_plain(next_value)}"
                             )
                         else:
                             acc.append(
@@ -45,25 +57,10 @@ def plain(diff):  # noqa: C901
                         acc.append(
                             f"Property '{path + get_key(item)}' "
                             f"was added with value: "
-                            f"{check_plain(get_value(item))}"
+                            f"{convert_plain(get_value(item))}"
                         )
         return acc
 
     result = walk(diff, [], '')
     result = '\n'.join(result)
     return result
-
-
-def check_plain(value):
-    if isinstance(value, dict):
-        return "[complex value]"
-    encoder = {True: 'true', False: 'false', None: 'null'}
-    for key, key_value in encoder.items():
-        if value is key:
-            return key_value
-        else:
-            pass
-    if type(value) == int:
-        return value
-    else:
-        return f"'{value}'"
