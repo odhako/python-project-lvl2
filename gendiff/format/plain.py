@@ -1,6 +1,5 @@
-from gendiff.format.internal import get_key, get_status
-from gendiff.format.internal import get_value, get_children
-from gendiff.format.internal import ADDED, REMOVED, CHILDREN
+from gendiff.diff_tree_generator import get_key, get_status, get_value
+from gendiff.diff_tree_generator import get_children, ADDED, REMOVED, CHILDREN
 
 
 def convert_plain(value):
