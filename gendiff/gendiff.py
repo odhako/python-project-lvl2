@@ -42,30 +42,30 @@ def make_leaf(key, status, value):
 
 
 def make_inner_diff(dict1, dict2):  # noqa: C901
+
     def walk(item1, item2, acc=[]):
-        for key, value in item1.items():
-            if key in item2 and type(value) == dict and type(item2[key]) == dict: # noqa
-                status = SAME
-                acc.append(
-                    make_node(
-                        key, status, walk(value, item2[key], acc=[])
+        keys = set()
+        keys.update(item1.keys(), item2.keys())
+        for key in keys:
+            if key in item1 and key not in item2:
+                acc.append(make_leaf(key, REMOVED, item1[key]))
+            elif key in item2 and key not in item1:
+                acc.append(make_leaf(key, ADDED, item2[key]))
+            elif key in item1 and key in item2:
+                if type(item1[key]) == dict and type(item2[key]) == dict:
+                    status = SAME  # TODO: make new status 'HAS_CHILDREN' for example
+                    acc.append(
+                        make_node(
+                            key, status, walk(item1[key], item2[key], acc=[])
+                        )
                     )
-                )
-            elif key in item2 and value == item2[key]:
-                status = SAME
-                acc.append(make_leaf(key, status, value))
-            else:
-                status = REMOVED
-                acc.append(make_leaf(key, status, value))
-        for key, value in item2.items():
-            if key in item1 and type(value) == dict and type(item1[key]) == dict:  # noqa
-                pass
-            elif key in item1 and value == item1[key]:
-                pass
-            else:
-                status = ADDED
-                acc.append(make_leaf(key, status, value))
+                elif item1[key] == item2[key]:
+                    acc.append(make_leaf(key, SAME, item1[key]))
+                else:
+                    acc.append(make_leaf(key, REMOVED, item1[key]))
+                    acc.append(make_leaf(key, ADDED, item2[key]))
         return acc
+
     answer = walk(dict1, dict2)
     return answer
 
