@@ -20,4 +20,5 @@ def get_children(item):
 
 ADDED = 'ADDED'
 REMOVED = 'REMOVED'
-SAME = 'SAME'
+CHILDREN = 'CHILDREN'
+NOT_CHANGED = 'NOT CHANGED'

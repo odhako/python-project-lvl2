@@ -1,6 +1,6 @@
-from gendiff.format.internal import is_node, get_key, get_status
+from gendiff.format.internal import get_key, get_status
 from gendiff.format.internal import get_value, get_children
-from gendiff.format.internal import ADDED, REMOVED, SAME
+from gendiff.format.internal import ADDED, REMOVED, CHILDREN
 
 
 def convert_plain(value):
@@ -19,12 +19,9 @@ def plain(diff):  # noqa: C901
 
     def walk(children, acc, path):
         for index, item in enumerate(sorted(children, key=get_key)):
-            if get_status(item) == SAME:
-                if is_node(item):
-                    new_path = path + get_key(item) + '.'
-                    walk(get_children(item), acc, new_path)
-                else:
-                    pass
+            if get_status(item) == CHILDREN:
+                new_path = path + get_key(item) + '.'
+                walk(get_children(item), acc, new_path)
             else:
                 if get_status(item) == REMOVED:
                     if index == len(children) - 1:

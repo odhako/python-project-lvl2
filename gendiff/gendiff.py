@@ -1,4 +1,4 @@
-from gendiff.format.internal import ADDED, REMOVED, SAME
+from gendiff.format.internal import ADDED, REMOVED, CHILDREN, NOT_CHANGED
 from gendiff.format.output import form_output, STYLISH
 from json import loads as json_loads
 from yaml import safe_load as yaml_loads
@@ -53,14 +53,13 @@ def make_inner_diff(dict1, dict2):  # noqa: C901
                 acc.append(make_leaf(key, ADDED, item2[key]))
             elif key in item1 and key in item2:
                 if type(item1[key]) == dict and type(item2[key]) == dict:
-                    status = SAME  # TODO: make new status 'HAS_CHILDREN' for example
                     acc.append(
                         make_node(
-                            key, status, walk(item1[key], item2[key], acc=[])
+                            key, CHILDREN, walk(item1[key], item2[key], acc=[])
                         )
                     )
                 elif item1[key] == item2[key]:
-                    acc.append(make_leaf(key, SAME, item1[key]))
+                    acc.append(make_leaf(key, NOT_CHANGED, item1[key]))
                 else:
                     acc.append(make_leaf(key, REMOVED, item1[key]))
                     acc.append(make_leaf(key, ADDED, item2[key]))

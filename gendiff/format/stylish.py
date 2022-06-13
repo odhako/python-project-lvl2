@@ -1,10 +1,10 @@
 from gendiff.format.internal import is_node, get_key, get_status, get_value
 from gendiff.format.internal import get_children
-from gendiff.format.internal import ADDED, REMOVED, SAME
+from gendiff.format.internal import ADDED, REMOVED, CHILDREN, NOT_CHANGED
 
 
 def get_output_status(status):
-    return {ADDED: '+', REMOVED: '-', SAME: ' '}[status]
+    return {ADDED: '+', REMOVED: '-', CHILDREN: ' ', NOT_CHANGED: ' '}[status]
 
 
 def convert_stylish(value):
