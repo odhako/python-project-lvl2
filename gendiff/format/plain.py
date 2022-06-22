@@ -2,7 +2,7 @@ from gendiff.diff_tree_generator import get_key, get_status, get_value
 from gendiff.diff_tree_generator import get_children, ADDED, REMOVED, CHILDREN
 
 
-def convert_plain(value):
+def to_string_plain(value):
     if isinstance(value, dict):
         return "[complex value]"
     if type(value) == int:
@@ -38,8 +38,8 @@ def plain(diff):  # noqa: C901
                             acc.append(
                                 f"Property '{path + get_key(item)}' "
                                 f"was updated. From "
-                                f"{convert_plain(get_value(item))} to "
-                                f"{convert_plain(next_value)}"
+                                f"{to_string_plain(get_value(item))} to "
+                                f"{to_string_plain(next_value)}"
                             )
                         else:
                             acc.append(
@@ -53,7 +53,7 @@ def plain(diff):  # noqa: C901
                         acc.append(
                             f"Property '{path + get_key(item)}' "
                             f"was added with value: "
-                            f"{convert_plain(get_value(item))}"
+                            f"{to_string_plain(get_value(item))}"
                         )
         return acc
 

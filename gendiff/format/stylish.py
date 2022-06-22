@@ -7,7 +7,7 @@ def get_output_status(status):
     return {ADDED: '+', REMOVED: '-', CHILDREN: ' ', NOT_CHANGED: ' '}[status]
 
 
-def convert_stylish(value):
+def to_string_stylish(value):
     if type(value) == int:
         return value
     encoder = {True: 'true', False: 'false', None: 'null'}
@@ -56,7 +56,7 @@ def stylish(diff):  # noqa: C901
                     acc.append(
                         f'{indent * depth}  '
                         f'{get_output_status(get_status(item))} '
-                        f'{get_key(item)}: {convert_stylish(get_value(item))}'
+                        f'{get_key(item)}: {to_string_stylish(get_value(item))}'
                     )
         return acc
 
