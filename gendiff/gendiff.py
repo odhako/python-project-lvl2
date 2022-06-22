@@ -2,12 +2,13 @@ from gendiff.diff_tree_generator import make_inner_diff
 from gendiff.format.output import form_output, STYLISH
 from json import loads as json_loads
 from yaml import safe_load as yaml_loads
+from os.path import splitext
 
 
 def read_file(file_path):
-    if file_path.endswith('.json'):
+    if splitext(file_path)[1] == '.json':
         file_format = 'json'
-    elif file_path.endswith(('.yaml', '.yml')):
+    elif splitext(file_path)[1] == '.yaml' or splitext(file_path)[1] == '.yml':
         file_format = 'yaml'
     else:
         raise TypeError('Unknown file type!')
