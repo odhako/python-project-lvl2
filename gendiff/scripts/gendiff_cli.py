@@ -5,7 +5,7 @@ from gendiff.cli import cli
 
 
 def main():
-    cli()
+    print(cli())
 
 
 if __name__ == '__main__':
